@@ -5,18 +5,32 @@ const SubmitReflection = () => {
   const [text, setText] = useState("");
   const [photo, setPhoto] = useState(null);
   const [audio, setAudio] = useState(null);
+const handleSubmit = (e) => {
+  e.preventDefault();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Reflection Submitted:", { text, photo, audio });
+  // Save reflections
+  const reflections = JSON.parse(localStorage.getItem("reflections") || "[]");
+  reflections.push({
+    text,
+    photo: photo?.name || null,
+    audio: audio?.name || null,
+    timestamp: new Date().toISOString(),
+  });
+  localStorage.setItem("reflections", JSON.stringify(reflections));
 
-    toast.success("Reflection submitted successfully! 💡");
+  // Update points
+  const oldPoints = parseInt(localStorage.getItem("sparkPoints") || "0");
+  localStorage.setItem("sparkPoints", oldPoints + 10);
 
-    // Clear form
-    setText("");
-    setPhoto(null);
-    setAudio(null);
-  };
+  // Toast
+  toast.success("Reflection submitted! 💡 +10 Spark Points");
+
+  // Reset form
+  setText("");
+  setPhoto(null);
+  setAudio(null);
+};
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 flex items-center justify-center p-4">

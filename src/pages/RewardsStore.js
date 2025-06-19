@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from "react-toastify";
 
 const rewards = [
   {
@@ -21,6 +22,34 @@ const rewards = [
   },
 ];
 
+// ✅ Handles redeem logic
+const handleRedeem = (reward) => {
+  const current = parseInt(localStorage.getItem("sparkPoints") || 0);
+  const redeemed = JSON.parse(localStorage.getItem("redeemedRewards") || "[]");
+
+  if (redeemed.includes(reward.id)) {
+    toast.info("You have already redeemed this reward.");
+    return;
+  }
+
+  if (current >= reward.points) {
+    localStorage.setItem("sparkPoints", current - reward.points);
+    localStorage.setItem(
+      "redeemedRewards",
+      JSON.stringify([...redeemed, reward.id])
+    );
+    toast.success(`🎉 Redeemed "${reward.title}"! -${reward.points} points`);
+    window.location.reload(); // Refresh to show updated UI
+  } else {
+    toast.error("Not enough Spark Points to redeem this reward.");
+  }
+};
+
+const isRedeemed = (id) => {
+  const redeemed = JSON.parse(localStorage.getItem("redeemedRewards") || "[]");
+  return redeemed.includes(id);
+};
+
 const RewardsStore = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-orange-50 to-yellow-50 p-6 flex items-center justify-center">
@@ -41,12 +70,22 @@ const RewardsStore = () => {
                 </h3>
                 <p className="text-gray-600 mb-4">{reward.description}</p>
               </div>
+
               <div className="mt-auto flex items-center justify-between">
                 <span className="text-sm text-gray-500">
                   Cost: <strong>{reward.points}</strong> points
                 </span>
-                <button className="bg-pink-600 hover:bg-pink-700 text-white px-4 py-1.5 rounded-md transition">
-                  Redeem
+
+                <button
+                  onClick={() => handleRedeem(reward)}
+                  disabled={isRedeemed(reward.id)}
+                  className={`${
+                    isRedeemed(reward.id)
+                      ? "bg-gray-400 cursor-not-allowed"
+                      : "bg-pink-600 hover:bg-pink-700"
+                  } text-white px-4 py-1.5 rounded-md transition`}
+                >
+                  {isRedeemed(reward.id) ? "Redeemed" : "Redeem"}
                 </button>
               </div>
             </div>
