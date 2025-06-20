@@ -28,7 +28,7 @@ const handleRedeem = (reward) => {
   const redeemed = JSON.parse(localStorage.getItem("redeemedRewards") || "[]");
 
   if (redeemed.includes(reward.id)) {
-    toast.info("You have already redeemed this reward.");
+    toast.info("You already redeemed this.");
     return;
   }
 
@@ -39,11 +39,12 @@ const handleRedeem = (reward) => {
       JSON.stringify([...redeemed, reward.id])
     );
     toast.success(`🎉 Redeemed "${reward.title}"! -${reward.points} points`);
-    window.location.reload(); // Refresh to show updated UI
+    window.location.reload();
   } else {
-    toast.error("Not enough Spark Points to redeem this reward.");
+    toast.error("Not enough Spark Points to redeem.");
   }
 };
+
 
 const isRedeemed = (id) => {
   const redeemed = JSON.parse(localStorage.getItem("redeemedRewards") || "[]");
@@ -77,16 +78,17 @@ const RewardsStore = () => {
                 </span>
 
                 <button
-                  onClick={() => handleRedeem(reward)}
-                  disabled={isRedeemed(reward.id)}
-                  className={`${
-                    isRedeemed(reward.id)
-                      ? "bg-gray-400 cursor-not-allowed"
-                      : "bg-pink-600 hover:bg-pink-700"
-                  } text-white px-4 py-1.5 rounded-md transition`}
-                >
-                  {isRedeemed(reward.id) ? "Redeemed" : "Redeem"}
-                </button>
+  onClick={() => handleRedeem(reward)}
+  disabled={isRedeemed(reward.id)}
+  className={`${
+    isRedeemed(reward.id)
+      ? "bg-gray-400 cursor-not-allowed"
+      : "bg-pink-600 hover:bg-pink-700"
+  } text-white px-4 py-1.5 rounded-md transition`}
+>
+  {isRedeemed(reward.id) ? "Redeemed" : "Redeem"}
+</button>
+
               </div>
             </div>
           ))}

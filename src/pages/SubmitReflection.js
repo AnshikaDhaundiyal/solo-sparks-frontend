@@ -5,10 +5,10 @@ const SubmitReflection = () => {
   const [text, setText] = useState("");
   const [photo, setPhoto] = useState(null);
   const [audio, setAudio] = useState(null);
+
 const handleSubmit = (e) => {
   e.preventDefault();
 
-  // Save reflections
   const reflections = JSON.parse(localStorage.getItem("reflections") || "[]");
   reflections.push({
     text,
@@ -18,18 +18,18 @@ const handleSubmit = (e) => {
   });
   localStorage.setItem("reflections", JSON.stringify(reflections));
 
-  // Update points
+  // Add Spark Points
   const oldPoints = parseInt(localStorage.getItem("sparkPoints") || "0");
   localStorage.setItem("sparkPoints", oldPoints + 10);
 
-  // Toast
-  toast.success("Reflection submitted! 💡 +10 Spark Points");
+  toast.success("Reflection submitted successfully! 💡 +10 points");
 
-  // Reset form
+  // Clear form
   setText("");
   setPhoto(null);
   setAudio(null);
 };
+
 
 
   return (
