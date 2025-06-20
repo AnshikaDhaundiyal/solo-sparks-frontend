@@ -3,7 +3,14 @@
 A React.js-based self-discovery and emotional growth app where users complete personalized quests, submit reflections, earn spark points, and unlock meaningful rewards — helping them fall in love with themselves before anyone else 💖
 
 ---
+## 🚀 Live Demo
 
+Check out the live version of this project:
+
+🔗 [Solo Sparks Live](https://solo-sparks-frontend.netlify.app)
+
+Hosted on [Netlify](https://www.netlify.com/).
+  
 ## ✨ Features
 
 - 🧠 Personalized Onboarding (mood & personality)
