@@ -71,10 +71,12 @@ src/
 📸 Screenshots
 
 ## ✍️ Submit Reflection
-![Reflection Page](./screenshots/submit-reflection.png)
+![Reflection Page](![WhatsApp Image 2025-06-20 at 16 43 30_c1421a21](https://github.com/user-attachments/assets/78f2316b-ca40-4be7-8262-31838566e0f3)
+)
 
 ## 🎁 Rewards Store
-![Rewards Page](./screenshots/rewards.png)
+![Rewards Page](![WhatsApp Image 2025-06-20 at 16 44 28_4fc0bd7f](https://github.com/user-attachments/assets/df02cab1-679a-4ccc-9100-ecb913edd6a5)
+)
 
 👩‍💻 Developed By
 Anshika Dhaundiyal
